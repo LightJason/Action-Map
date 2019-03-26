@@ -35,9 +35,11 @@ import org.lightjason.agentspeak.action.map.multimap.CCreate;
 import org.lightjason.agentspeak.action.map.multimap.CGetMultiple;
 import org.lightjason.agentspeak.action.map.multimap.CGetSingle;
 import org.lightjason.agentspeak.action.map.multimap.CKeys;
+import org.lightjason.agentspeak.action.map.multimap.CLambdaStreaming;
 import org.lightjason.agentspeak.action.map.multimap.CPutMultiple;
 import org.lightjason.agentspeak.action.map.multimap.CPutSingle;
 import org.lightjason.agentspeak.action.map.multimap.CValues;
+import org.lightjason.agentspeak.error.context.CExecutionIllegealArgumentException;
 import org.lightjason.agentspeak.language.CCommon;
 import org.lightjason.agentspeak.language.CRawTerm;
 import org.lightjason.agentspeak.language.ITerm;
@@ -49,6 +51,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -95,6 +98,19 @@ public final class TestCActionCollectionMultimap extends IBaseTest
 
         Assert.assertEquals( 1, l_return.size() );
         Assert.assertEquals( Multimaps.synchronizedSetMultimap( HashMultimap.create() ).getClass(), l_return.get( 0 ).raw().getClass() );
+    }
+
+    /**
+     * test create error
+     */
+    @Test( expected = CExecutionIllegealArgumentException.class )
+    public void createerror()
+    {
+        new CCreate().execute(
+            true, IContext.EMPTYPLAN,
+            Stream.of( "x" ).map( CRawTerm::of ).collect( Collectors.toList() ),
+            Collections.emptyList()
+        );
     }
 
 
@@ -254,6 +270,28 @@ public final class TestCActionCollectionMultimap extends IBaseTest
         Assert.assertEquals( 2, l_return.size() );
         Assert.assertArrayEquals( Stream.of( "foo" ).toArray(), l_return.get( 0 ).<List<?>>raw().toArray() );
         Assert.assertArrayEquals( Stream.of( "foobar" ).toArray(), l_return.get( 1 ).<List<?>>raw().toArray() );
+    }
+
+    /**
+     * test lambda
+     */
+    @Test
+    @SuppressWarnings( "unchecked" )
+    public void lambda()
+    {
+        final Multimap<Integer, String> l_map = HashMultimap.create();
+        l_map.put( 1, "foo123" );
+        l_map.put( 1, "foo456" );
+        l_map.put( 2, "bar123" );
+
+
+        Assert.assertArrayEquals(
+            Stream.of( 1, "foo123", "foo456", 2, "bar123" ).toArray(),
+            new CLambdaStreaming().apply( l_map )
+                                  .map( i -> (Map.Entry<Integer, Set<String>>) i )
+                                  .flatMap( i -> Stream.concat( Stream.of( i.getKey() ), i.getValue().stream() ) )
+                                  .toArray()
+        );
     }
 
 }

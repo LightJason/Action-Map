@@ -30,6 +30,7 @@ import org.lightjason.agentspeak.action.map.map.CCreate;
 import org.lightjason.agentspeak.action.map.map.CGetMultiple;
 import org.lightjason.agentspeak.action.map.map.CGetSingle;
 import org.lightjason.agentspeak.action.map.map.CKeys;
+import org.lightjason.agentspeak.action.map.map.CLambdaStreaming;
 import org.lightjason.agentspeak.action.map.map.CPutMultiple;
 import org.lightjason.agentspeak.action.map.map.CPutMultipleIfAbsent;
 import org.lightjason.agentspeak.action.map.map.CPutSingle;
@@ -280,4 +281,24 @@ public final class TestCActionCollectionMap extends IBaseTest
         Assert.assertEquals( "text", l_return.get( 1 ).raw() );
     }
 
+    /**
+     * test lambda
+     */
+    @Test
+    @SuppressWarnings( "unchecked" )
+    public void lambda()
+    {
+        final Map<Integer, String> l_map = new HashMap<>();
+        l_map.put( 1, "foo123" );
+        l_map.put( 2, "bar123" );
+
+
+        Assert.assertArrayEquals(
+            Stream.of( 1, "foo123", 2, "bar123" ).toArray(),
+            new CLambdaStreaming().apply( l_map )
+                                  .map( i -> (Map.Entry<Integer, String>) i )
+                                  .flatMap( i -> Stream.of( i.getKey(), i.getValue() ) )
+                                  .toArray()
+        );
+    }
 }
