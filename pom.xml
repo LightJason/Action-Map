@@ -31,7 +31,7 @@
     <!-- project meta information -->
     <name>LightJason AgentSpeak(L++) - Map Action</name>
     <description>AgentSpeak(L++) action for Map structure</description>
-    <url>https://github.com/LightJason/AgentSpeak</url>
+    <url>https://github.com/LightJason/Java-Action-Map</url>
     
     <organization>
         <name>LightJason</name>
@@ -47,13 +47,13 @@
     
     <issueManagement>
         <system>GitHub Issues</system>
-        <url>https://github.com/LightJason/Action-Map/issues</url>
+        <url>https://github.com/LightJason/Java-Action-Map/issues</url>
     </issueManagement>
     
     <scm>
-        <url>https://github.com/LightJason/Action-Map</url>
-        <connection>scm:git:git://github.com:LightJason/Action-Map.git</connection>
-        <developerConnection>scm:git:git@github.com:LightJason/Action-Map.git</developerConnection>
+        <url>https://github.com/LightJason/Java-Action-Map</url>
+        <connection>scm:git:git://github.com:LightJason/Java-Action-Map.git</connection>
+        <developerConnection>scm:git:git@github.com:LightJason/Java-Action-Map.git</developerConnection>
         <tag>v0.0.1</tag>
     </scm>
     
