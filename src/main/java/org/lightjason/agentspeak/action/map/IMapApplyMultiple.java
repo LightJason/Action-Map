@@ -77,7 +77,7 @@ public abstract class IMapApplyMultiple<T> extends IBaseAction
         )
                    .forEach( i -> this.apply( l_list.get( 0 ).<T>raw(), i.get( 0 ).raw(), i.get( 1 ).raw() ) );
 
-        return Stream.of();
+        return Stream.empty();
     }
 
     /**

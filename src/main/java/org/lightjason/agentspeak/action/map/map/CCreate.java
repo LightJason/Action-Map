@@ -82,7 +82,7 @@ public final class CCreate extends IBaseAction
                    .forEach( i -> l_map.put( i.get( 0 ).raw(), i.get( 1 ).raw() ) );
         p_return.add( CRawTerm.of( l_map ) );
 
-        return Stream.of();
+        return Stream.empty();
     }
 
 }

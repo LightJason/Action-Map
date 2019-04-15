@@ -64,7 +64,7 @@ public abstract class IMapApplySingle<T> extends IBaseAction
         CCommon.flatten( p_argument.stream().skip( 2 ) )
                .forEach( i -> this.apply( i.<T>raw(), p_argument.get( 0 ).raw(), p_argument.get( 1 ).raw() ) );
 
-        return Stream.of();
+        return Stream.empty();
     }
 
     /**

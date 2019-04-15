@@ -64,7 +64,7 @@ public abstract class IMapGetMultiple<T> extends IBaseAction
                .skip( 1 )
                .forEach( i -> this.apply( p_parallel, p_argument.get( 0 ).<T>raw(), i.raw(), p_return ) );
 
-        return Stream.of();
+        return Stream.empty();
     }
 
 

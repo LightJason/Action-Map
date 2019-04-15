@@ -75,7 +75,7 @@ public final class CMapClear extends IBaseAction
                                            @Nonnull final List<ITerm> p_argument, @Nonnull final List<ITerm> p_return )
     {
         p_argument.parallelStream().forEach( CMapClear::clear );
-        return Stream.of();
+        return Stream.empty();
     }
 
     /**

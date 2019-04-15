@@ -64,7 +64,7 @@ public abstract class IMapGetSingle<T> extends IBaseAction
                .skip( 1 )
                .forEach( i -> this.apply( p_parallel, i.<T>raw(), p_argument.get( 0 ).raw(), p_return ) );
 
-        return Stream.of();
+        return Stream.empty();
     }
 
 

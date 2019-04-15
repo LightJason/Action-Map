@@ -90,7 +90,7 @@ public final class CKeys extends IBaseAction
             )
         );
 
-        return Stream.of();
+        return Stream.empty();
     }
 
 }
