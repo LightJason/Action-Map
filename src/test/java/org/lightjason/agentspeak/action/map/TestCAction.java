@@ -26,8 +26,8 @@ package org.lightjason.agentspeak.action.map;
 import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.lightjason.agentspeak.language.CRawTerm;
 import org.lightjason.agentspeak.language.ITerm;
 import org.lightjason.agentspeak.language.execution.IContext;
@@ -65,8 +65,8 @@ public final class TestCAction
             Collections.emptyList()
         );
 
-        Assert.assertTrue( l_map.isEmpty() );
-        Assert.assertTrue( l_multimap.isEmpty() );
+        Assertions.assertTrue( l_map.isEmpty() );
+        Assertions.assertTrue( l_multimap.isEmpty() );
 
     }
 
@@ -86,8 +86,8 @@ public final class TestCAction
             l_return
         );
 
-        Assert.assertEquals( 6, l_return.size() );
-        Assert.assertArrayEquals( Stream.of( false, false, true, true, false, false ).toArray(), l_return.stream().map( ITerm::<Boolean>raw ).toArray() );
+        Assertions.assertEquals( 6, l_return.size() );
+        Assertions.assertArrayEquals( Stream.of( false, false, true, true, false, false ).toArray(), l_return.stream().map( ITerm::<Boolean>raw ).toArray() );
     }
 
     /**
@@ -116,6 +116,6 @@ public final class TestCAction
             l_return
         );
 
-        Assert.assertArrayEquals( Stream.of( 0L, 0L, 3L, 2L, 0L, 0L ).toArray(), l_return.stream().map( ITerm::raw ).toArray() );
+        Assertions.assertArrayEquals( Stream.of( 0L, 0L, 3L, 2L, 0L, 0L ).toArray(), l_return.stream().map( ITerm::raw ).toArray() );
     }
 }
